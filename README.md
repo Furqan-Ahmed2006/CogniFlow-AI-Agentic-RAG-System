@@ -119,7 +119,7 @@ CogniRAG-AI was evaluated using multilingual datasets containing employee handbo
 
 **Streamlit Cloud Application:** [Access CogniRAG-AI](https://cogniflow-ai-agentic-rag-system-ctkyfqwk4ypwzt8a9tymfz.streamlit.app/)
 
-*Replace the placeholder link with your deployed Streamlit application URL.*
+
 
 ---
 
@@ -231,4 +231,3 @@ This project is licensed under the **MIT License**. You are free to use, modify,
 
 ---
 
-**Built with Python, LangChain, LangGraph, RAG, and Agentic AI.**
