@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+myenv/
+venv/
+env/
+
+.env
+.streamlit/secrets.toml
+
+chroma_db/
+uploads/
+
+.deepeval-cache/
+.DS_Store
+Thumbs.db
