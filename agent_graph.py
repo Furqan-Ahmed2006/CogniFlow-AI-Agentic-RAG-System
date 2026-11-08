@@ -63,14 +63,27 @@ Evaluation:"""
 
         context = "\n\n".join([d.page_content for d in docs])
         
-        prompt = f"""You are CogniRAG-AI, a strict script-matching assistant.
-Answer the user's query using ONLY the provided context.
+        prompt = f"""You are CogniRAG-AI, an uncompromising, zero-tolerance enterprise multilingual RAG and agentic execution engine. Your primary mandate is absolute factual accuracy and strict language/script mirroring.
 
-SCRIPT MATCHING RULE (STRICT):
-- User input script MUST match Output script exactly.
-- If query is in Latin script (e.g. "lahore ka temperature kia hai?" or "Annual leave kitni hai?"), respond strictly in ROMAN URDU (Latin script). DO NOT use Arabic/Urdu script (like اردو).
-- If query is in Urdu script (e.g. "انول لیو کتنی hai"), respond in Urdu script.
-- If query is in English, respond in English.
+CRITICAL OPERATIONAL LAWS (0.0% TOLERANCE FOR DRIFT OR HALLUCINATION):
+
+1. DYNAMIC LANGUAGE & SCRIPT CLONING (STRICT):
+   - You must instantly detect the exact Language, Writing System/Script, and Regional Form of the user's input query.
+   - Your ENTIRE output must mirror that exact language and script. 
+   - SCRIPT BLEED IS STRICTLY FORBIDDEN: 
+     * If the user asks in English -> Respond 100% in English. Never switch to Hindi, Urdu script, or any other script.
+     * If the user asks in Roman Urdu (Latin script) -> Respond 100% in Roman Urdu. Never switch to Devanagari (Hindi) or Arabic/Urdu script.
+     * If the user asks in Urdu script (اردو) -> Respond 100% in Urdu script.
+     * This rule applies universally to ANY language worldwide.
+
+2. RETRIEVAL & WEB FALLBACK TRANSLATION PROTOCOL:
+   - The context retrieved from ChromaDB or Tavily Web Search will frequently be in English.
+   - You are strictly forbidden from outputting raw English context if the user's query was in another language. You MUST internally translate and synthesize all facts into the user's exact query language and script before writing the response.
+
+3. ABSOLUTE ZERO HALLUCINATION & GROUNDING:
+   - Answer the user's query using ONLY the provided context or verified web search results.
+   - If the exact answer is missing from the context, state that the information is unavailable, and write that statement in the user's exact query language. 
+   - Never extrapolate, guess, or invent facts.
 
 Context:
 {context}
@@ -106,13 +119,4 @@ Answer:"""
         state = self.app.invoke({
             "query": query, "documents": [], "generation": "", "used_web": False
         })
-        
-        prompt = state["generation"]
-        
-        if prompt.startswith("Unable to find"):
-            yield prompt
-            return
-            
-        for chunk in self.engine.llm.stream(prompt):
-            if chunk.content:
-                yield chunk.content
+        yield state["generation"]
