@@ -117,7 +117,7 @@ CogniRAG-AI was evaluated using multilingual datasets containing employee handbo
 
 ## **🚀 Live Demo**
 
-**Streamlit Cloud Application:** [Access CogniRAG-AI](#)
+**Streamlit Cloud Application:** [Access CogniRAG-AI](https://cogniflow-ai-agentic-rag-system-ctkyfqwk4ypwzt8a9tymfz.streamlit.app/)
 
 *Replace the placeholder link with your deployed Streamlit application URL.*
 

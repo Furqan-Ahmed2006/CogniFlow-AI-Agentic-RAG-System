@@ -2,7 +2,7 @@ import os
 import time
 from playwright.sync_api import sync_playwright
 
-APP_URL = os.getenv("STREAMLIT_APP_URL", "https://your-cognirag-ai-app-url.streamlit.app")
+APP_URL = os.getenv("STREAMLIT_APP_URL", "https://cogniflow-ai-agentic-rag-system-ctkyfqwk4ypwzt8a9tymfz.streamlit.app/")
 
 def ping_streamlit_app():
     print(f"🚀 Launching headless browser to ping: {APP_URL}")
